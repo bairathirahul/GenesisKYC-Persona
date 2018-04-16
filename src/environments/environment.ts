@@ -4,5 +4,9 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  serviceURL: 'http://localhost:9000/',
+  updateURL: 'http://localhost:9000/execute',
+  queryURL: 'http://localhost:9000/execute',
+  persona: 'BankX'
 };
