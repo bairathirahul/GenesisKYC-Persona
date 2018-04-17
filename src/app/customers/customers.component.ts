@@ -59,6 +59,7 @@ export class CustomersComponent implements OnInit {
     } else if (customer.accesses[environment.persona] === false) {
       this.dialog.open(MessageDialogComponent, {data: {message: 'Customer approval is awaited'}});
     } else {
+      this.service.selectedCustomer = customer;
       this.router.navigate(['/customer', customer.id]);
     }
   }

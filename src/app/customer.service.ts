@@ -14,6 +14,7 @@ import {map} from 'rxjs/operators';
 export class CustomerService {
 
   customers: Array<Customer>;
+  selectedCustomer: Customer;
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -74,16 +75,16 @@ export class CustomerService {
     const service = this;
     const params = {...this.obcParams};
     params.method = 'requestCustomerAccess';
-    params.args = [customer.id.toString()];
+    params.args = [customer.id.toString(), environment.persona];
     params.url = environment.queryURL;
     return this.http.post(environment.serviceURL + 'proxy', params, this.httpOptions)
-      .pipe(map(function (response: any) {
+      .subscribe(function (response: any) {
           if (response.returnCode === 'Success') {
-            customer.accesses[environment.persona] = true;
+            customer.accesses[environment.persona] = false;
           }
           return response;
         }
-      ));
+      );
   }
 
   getCustomers() {

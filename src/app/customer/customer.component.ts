@@ -1,8 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ChangeDetectorRef} from '@angular/core';
 import {environment} from '../../environments/environment';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Customer} from '../models/customer';
 import {CustomerService} from '../customer.service';
+import {MediaMatcher} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-customer',
@@ -12,24 +13,25 @@ import {CustomerService} from '../customer.service';
 
 export class CustomerComponent implements OnInit, OnDestroy {
   customer: Customer;
-  private sub: any;
 
-  constructor(private route: ActivatedRoute, private service: CustomerService) {
+  mobileQuery: MediaQueryList;
+  sideNavOpen = true;
+
+  private _mobileQueryListener: () => void;
+
+  constructor(private router: Router, private route: ActivatedRoute, private customerService: CustomerService,
+              changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
+    this.customer = this.customerService.selectedCustomer;
   }
 
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-      for (const customer of this.service.customers) {
-        if (customer.id === params['id']) {
-          this.customer = customer;
-          break;
-        }
-      }
-    });
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
   getPersona() {
