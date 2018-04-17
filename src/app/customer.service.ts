@@ -53,15 +53,15 @@ export class CustomerService {
             const data = JSON.parse(response.result);
             for (const entry of data) {
               const customer = new Customer();
-              customer.id = parseInt(entry.Record.ID, 10);
-              customer.basicInfo = BasicInfo.convert(entry.Record.BasicInfo);
-              customer.addresses = Address.convert(entry.Record.Addresses);
-              customer.contact = Contact.convert(entry.Record.Contact);
-              customer.bankAccounts = BankAccount.convert(entry.Record.BankAccounts);
-              customer.employments = Employment.convert(entry.Record.Employments);
-              customer.documents = Document.convert(entry.Record.Documents);
+              customer.id = parseInt(entry.ID, 10);
+              customer.basicInfo = BasicInfo.convert(entry.BasicInfo);
+              customer.addresses = Address.convert(entry.Addresses);
+              customer.contact = Contact.convert(entry.Contact);
+              customer.bankAccounts = BankAccount.convert(entry.BankAccounts);
+              customer.employments = Employment.convert(entry.Employments);
+              customer.documents = Document.convert(entry.Documents);
               customer.bankTransactions = BankTransaction.convert(entry.BankTransactions);
-              customer.accesses = entry.Record.Accesses;
+              customer.accesses = entry.Accesses;
               if (customer.accesses === null) {
                 customer.accesses = {};
               }
@@ -78,7 +78,7 @@ export class CustomerService {
     const params = {...this.obcParams};
     params.method = 'requestCustomerAccess';
     params.args = [customer.id.toString(), environment.persona];
-    params.url = environment.queryURL;
+    params.url = environment.updateURL;
     return this.http.post(environment.serviceURL + 'proxy', params, this.httpOptions)
       .subscribe(function (response: any) {
           if (response.returnCode === 'Success') {
@@ -98,7 +98,7 @@ export class CustomerService {
         return value.getTime();
       }
     })];
-    params.url = environment.queryURL;
+    params.url = environment.updateURL;
     return this.http.post(environment.serviceURL + 'proxy', params, this.httpOptions)
       .pipe(map(function (response: any) {
           if (response.returnCode === 'Success') {
