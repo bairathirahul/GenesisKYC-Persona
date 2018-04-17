@@ -35,6 +35,7 @@ import {MediaMatcher} from '@angular/cdk/layout';
 import {CustomerInformationComponent} from './customer-information/customer-information.component';
 import {CustomerDocumentsComponent} from './customer-documents/customer-documents.component';
 import {CustomerTransactionsComponent} from './customer-transactions/customer-transactions.component';
+import { CustomerTransactionModalComponent } from './customer-transaction-modal/customer-transaction-modal.component';
 
 const appRoutes: Routes = [
   {path: 'customers', component: CustomersComponent},
@@ -59,6 +60,7 @@ const appRoutes: Routes = [
     CustomerInformationComponent,
     CustomerDocumentsComponent,
     CustomerTransactionsComponent,
+    CustomerTransactionModalComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes, {enableTracing: false}),
@@ -86,7 +88,7 @@ const appRoutes: Routes = [
     MatNativeDateModule,
     MatDialogModule
   ],
-  entryComponents: [RequestDialogComponent, MessageDialogComponent],
+  entryComponents: [RequestDialogComponent, MessageDialogComponent, CustomerTransactionModalComponent],
   providers: [CustomerService, MediaMatcher],
   bootstrap: [AppComponent]
 })

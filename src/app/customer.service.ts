@@ -9,6 +9,7 @@ import {Employment} from './models/employment';
 import {BankAccount} from './models/bank-account';
 import {Document} from './models/document';
 import {map} from 'rxjs/operators';
+import {BankTransaction} from './models/bank-transaction';
 
 @Injectable()
 export class CustomerService {
@@ -59,8 +60,9 @@ export class CustomerService {
               customer.bankAccounts = BankAccount.convert(entry.Record.BankAccounts);
               customer.employments = Employment.convert(entry.Record.Employments);
               customer.documents = Document.convert(entry.Record.Documents);
+              customer.bankTransactions = BankTransaction.convert(entry.BankTransactions);
               customer.accesses = entry.Record.Accesses;
-              if(customer.accesses === null) {
+              if (customer.accesses === null) {
                 customer.accesses = {};
               }
               service.customers.push(customer);
@@ -85,6 +87,26 @@ export class CustomerService {
           return response;
         }
       );
+  }
+
+  addCustomerTransaction(bankTransaction, customer) {
+    const service = this;
+    const params = {...this.obcParams};
+    params.method = 'addCustomerTransaction';
+    params.args = [customer.id.toString(), JSON.stringify(bankTransaction, function (key, value) {
+      if (value instanceof Date) {
+        return value.getTime();
+      }
+    })];
+    params.url = environment.queryURL;
+    return this.http.post(environment.serviceURL + 'proxy', params, this.httpOptions)
+      .pipe(map(function (response: any) {
+          if (response.returnCode === 'Success') {
+            service.selectedCustomer.bankTransactions.unshift(bankTransaction);
+          }
+          return response;
+        }
+      ));
   }
 
   getCustomers() {

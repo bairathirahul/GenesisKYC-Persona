@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {CustomerService} from '../customer.service';
+import {Customer} from '../models/customer';
+import {MatDialog} from '@angular/material';
+import {CustomerTransactionModalComponent} from '../customer-transaction-modal/customer-transaction-modal.component';
 
 @Component({
   selector: 'app-customer-transactions',
@@ -7,7 +11,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerTransactionsComponent implements OnInit {
 
-  constructor() { }
+  customer: Customer;
+
+  constructor(private customerService: CustomerService, private dialog: MatDialog) {
+    this.customer = this.customerService.selectedCustomer;
+  }
+
+  onAddTransactionClick() {
+    this.dialog.open(CustomerTransactionModalComponent);
+  }
 
   ngOnInit() {
   }
