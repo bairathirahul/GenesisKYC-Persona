@@ -26,6 +26,10 @@
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
+        "bankx": "environments/environments.bankx.ts",
+        "banky": "environments/environments.banky.ts",
+        "embassy": "environments/environments.embassy.ts",
+        "regfin": "environments/environments.regfin.ts",
         "prod": "environments/environment.prod.ts"
       }
     }
