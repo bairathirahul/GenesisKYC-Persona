@@ -10,7 +10,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
   styleUrls: ['./customers.component.css']
 })
 export class CustomersComponent implements OnInit {
-  query = 'bairathirahul@gmail.com';
+  query = '';
   requesting = false;
 
   constructor(private router: Router, private service: CustomerService, private dialog: MatDialog) {
