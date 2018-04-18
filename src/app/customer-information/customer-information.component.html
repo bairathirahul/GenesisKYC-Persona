@@ -29,7 +29,7 @@
       </mat-card-title>
       <mat-card-content>
         <mat-accordion>
-          <mat-expansion-panel *ngFor="let address of customer.addresses; let i = index" [expanded]="true">
+          <mat-expansion-panel *ngFor="let address of customer.addresses; let i = index" [expanded]="false">
             <mat-expansion-panel-header>
               <mat-panel-title>Address {{ i + 1 }}</mat-panel-title>
             </mat-expansion-panel-header>
@@ -63,7 +63,7 @@
       </mat-card-title>
       <mat-card-content>
         <mat-accordion>
-          <mat-expansion-panel *ngFor="let bankAccount of customer.bankAccounts; let i = index" [expanded]="true">
+          <mat-expansion-panel *ngFor="let bankAccount of customer.bankAccounts; let i = index" [expanded]="false">
             <mat-expansion-panel-header>
               <mat-panel-title>Bank Account {{ i + 1 }}</mat-panel-title>
             </mat-expansion-panel-header>
@@ -87,6 +87,12 @@
   </div>
 
   <div class="col">
+    <mat-card>
+      <mat-card-title>
+        AML Risk Rating: {{ customer.rating }}
+      </mat-card-title>
+    </mat-card>
+
     <mat-card>
       <mat-card-title>
         Contact Information
@@ -115,7 +121,7 @@
       </mat-card-title>
       <mat-card-content>
         <mat-accordion>
-          <mat-expansion-panel *ngFor="let employment of customer.employments; let i = index" [expanded]="true">
+          <mat-expansion-panel *ngFor="let employment of customer.employments; let i = index" [expanded]="false">
             <mat-expansion-panel-header>
               <mat-panel-title>Employment {{ i + 1 }}</mat-panel-title>
             </mat-expansion-panel-header>

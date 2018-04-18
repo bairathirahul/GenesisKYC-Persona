@@ -16,9 +16,9 @@ export class BankTransaction {
         bankTransaction.transactionID = entry.TransactionID;
         bankTransaction.transactionDate = new Date(entry.TransactionDate);
         bankTransaction.transactionType = entry.TransactionType;
-        bankTransaction.description = entry.Descripton;
+        bankTransaction.description = entry.Description;
         bankTransaction.amount = entry.Amount;
-        bankTransaction.flagged = entry.flagged;
+        bankTransaction.flagged = entry.Flagged;
         bankTransactions.push(bankTransaction);
       }
     }

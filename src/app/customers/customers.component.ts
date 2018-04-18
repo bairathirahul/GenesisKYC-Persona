@@ -34,6 +34,16 @@ export class CustomersComponent implements OnInit {
   }
 
   getStatusIcon(customer) {
+    if (customer.status === 'updated') {
+      return 'explore';
+    } else if (customer.status === 'approve') {
+      return 'check_circle';
+    } else if (customer.status === 'reject') {
+      return 'block';
+    }
+  }
+
+  getApprovalStatusIcon(customer) {
     if (typeof customer.accesses[environment.persona] === 'undefined') {
       return 'block';
     } else if (customer.accesses[environment.persona] === false) {

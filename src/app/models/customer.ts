@@ -17,4 +17,5 @@ export class Customer {
   bankTransactions: Array<BankTransaction>;
   accesses = {};
   status: string;
+  rating: number;
 }
